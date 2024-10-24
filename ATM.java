@@ -7,11 +7,16 @@ public class ATMSimulation {
     private String pin;
     private ArrayList<String> transactionHistory;
 
-    // Constructor to initialize the ATM simulation with a balance and a default PIN
-    public ATMSimulation(double initialBalance, String initialPin) {
+    // Constructor to initialize the ATM simulation with a balance
+    public ATMSimulation(double initialBalance) {
         this.balance = initialBalance;
-        this.pin = initialPin;
         this.transactionHistory = new ArrayList<>();
+    }
+
+    // Function to set a new PIN
+    public void setPIN(String newPin) {
+        this.pin = newPin;
+        System.out.println("PIN successfully set.");
     }
 
     // Function to display the main menu
@@ -84,9 +89,14 @@ public class ATMSimulation {
     }
 
     public static void main(String[] args) {
-        // Initializing the ATM with a starting balance of ₹1000 and default PIN "1234"
-        ATMSimulation atm = new ATMSimulation(1000.00, "1234");
+        // Initializing the ATM with a starting balance of ₹1000
+        ATMSimulation atm = new ATMSimulation(1000.00);
         Scanner scanner = new Scanner(System.in);
+
+        // Set the PIN when the program starts
+        System.out.print("Please set a new PIN for your account: ");
+        String newPin = scanner.nextLine();
+        atm.setPIN(newPin);
 
         boolean running = true;
         while (running) {
@@ -120,8 +130,8 @@ public class ATMSimulation {
                     System.out.print("Enter current PIN: ");
                     String currentPin = scanner.nextLine();
                     System.out.print("Enter new PIN: ");
-                    String newPin = scanner.nextLine();
-                    atm.changePIN(currentPin, newPin);
+                    String newPIN = scanner.nextLine();
+                    atm.changePIN(currentPin, newPIN);
                 } else if (choice == 5) {
                     atm.displayTransactionHistory();
                 } else if (choice == 6) {
